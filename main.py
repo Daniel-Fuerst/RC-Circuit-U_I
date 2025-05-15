@@ -1,43 +1,50 @@
 import matplotlib.pyplot as plt
 import math
 import numpy as np
+from order_of_magnitude import order_of_magnitude
 
-plt.rcParams['toolbar'] = 'none'
 
-# ============== RC CONFIGURATION ==============
+if __name__ == "__main__":
 
-# VOLTAGE in Volt
-voltage = 100
-# RESISTANCE in Ohms
-resistance = 1000
-# CAPACITY in Farad
-capacity = 0.000001
+    plt.rcParams['toolbar'] = 'none'
 
-# ============== ================ ==============
+    # ============== RC CONFIGURATION ==============
 
-tau = resistance * capacity
-current = voltage / resistance
+    # VOLTAGE in Volt
+    voltage = 100
+    # RESISTANCE in Ohms
+    resistance = 1000
+    # CAPACITY in Farad
+    capacity = 0.000001
 
-# generate time values
-x = np.linspace(0, 5 * tau, 100)
+    # ============== ================ ==============
 
-voltageValues = []
-for time in x:
-    voltageValues.append(voltage * (1 - math.exp(-(time/tau))))
+    tau = resistance * capacity
+    current = voltage / resistance
+    current_si_symbol = order_of_magnitude.symbol(current)
 
-currentValues = []
-for time in x:
-    currentValues.append((current * math.exp(-(time/tau)))*1000)
+    # generate time values
+    x = np.linspace(0, 5 * tau, 100)
 
-# plotting the points
-plt.plot(x * 1000, voltageValues, label = "Voltage [u(t)]")
-plt.plot(x * 1000, currentValues, label = "Current [i(t)]")
+    voltageValues = []
+    for time in x:
+        voltageValues.append(voltage * (1 - math.exp(-(time/tau))))
 
-# naming the x axis
-plt.xlabel('τ')
-# naming the y axis
-plt.ylabel('%')
-plt.title('Switching RC Circuit')
-plt.legend()
-plt.grid(True)
-plt.show()
+    currentValues = []
+    for time in x:
+        currentValues.append((current * math.exp(-(time/tau)))*1000)
+
+    # plotting the points
+    plt.plot(x * 1000, voltageValues, label = "Voltage")
+    plt.plot(x * 1000, currentValues, label = "Current")
+
+    # naming the x axis
+    plt.xlabel('τ')
+    # naming the y axis
+    current_si_symbol =
+    plt.ylabel(f'V / {current_si_symbol[1]}A')
+    plt.title('Switching RC Circuit')
+    plt.legend()
+    plt.grid(True)
+    plt.show()
+
