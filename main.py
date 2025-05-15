@@ -41,7 +41,6 @@ if __name__ == "__main__":
     # naming the x axis
     plt.xlabel('τ')
     # naming the y axis
-    current_si_symbol =
     plt.ylabel(f'V / {current_si_symbol[1]}A')
     plt.title('Switching RC Circuit')
     plt.legend()
