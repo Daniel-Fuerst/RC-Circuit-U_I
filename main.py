@@ -1,7 +1,6 @@
 import matplotlib.pyplot as plt
 import math
 import numpy as np
-from order_of_magnitude import order_of_magnitude
 
 
 if __name__ == "__main__":
@@ -21,10 +20,9 @@ if __name__ == "__main__":
 
     tau = resistance * capacity
     current = voltage / resistance
-    current_si_symbol = order_of_magnitude.symbol(current)
 
     # generate time values
-    x = np.linspace(0, 5 * tau, 100)
+    x = np.linspace(0, 5 * tau, 1000)
 
     voltageValues = []
     for time in x:
@@ -32,18 +30,25 @@ if __name__ == "__main__":
 
     currentValues = []
     for time in x:
-        currentValues.append((current * math.exp(-(time/tau)))*1000)
+        currentValues.append(current * math.exp(-(time/tau)))
 
-    # plotting the points
-    plt.plot(x * 1000, voltageValues, label = "Voltage")
-    plt.plot(x * 1000, currentValues, label = "Current")
+    # subplots
+    fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(10, 6))
 
-    # naming the x axis
-    plt.xlabel('τ')
-    # naming the y axis
-    plt.ylabel(f'V / {current_si_symbol[1]}A')
-    plt.title('Switching RC Circuit')
-    plt.legend()
-    plt.grid(True)
+    # plot Voltage
+    ax1.plot(x, voltageValues, color='blue', label="Voltage (V)")
+    ax1.set_xlabel(f"τ * {tau}")
+    ax1.set_ylabel("uc(t) (V)")
+    ax1.set_title("RC Circuit Behavior")
+    ax1.grid(True)
+    ax1.legend()
+
+    # plot Current
+    ax2.plot(x, currentValues, color='red', label=f"Current (A)")
+    ax2.set_xlabel(f"τ * {tau}")
+    ax2.set_ylabel(f"i(t) (A)")
+    ax2.grid(True)
+    ax2.legend()
+
     plt.show()
 

@@ -1,4 +1,2 @@
-order_of_magnitude
 matplotlib
 numpy
-num2words
