@@ -10,11 +10,11 @@ if __name__ == "__main__":
     # ============== RC CONFIGURATION ==============
 
     # VOLTAGE in Volt
-    voltage = 10
+    voltage = 100
     # RESISTANCE in Ohms
-    resistance = 10
+    resistance = 1000
     # CAPACITY in Farad
-    capacity = 0.007
+    capacity = 0.000001
 
     # ============== ================ ==============
 
@@ -52,4 +52,3 @@ if __name__ == "__main__":
     ax2.legend()
 
     plt.show()
-
